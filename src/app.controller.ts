@@ -2,14 +2,14 @@ import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common'
 import { AppService } from './app.service';
 import { User } from './user.models';
 import { UserUpdateDto } from './userUpdate.dto';
-
+import  { CreateUserDto } from './dto/create-user.dto';
 @Controller()
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
-  @Post()
-  async  createUser(@Body()  userDto: User) {
-    return this.appService.createUser(userDto)
+  @Post('createUser')
+  async  createUser(@Body()  createUserDto: CreateUserDto) {
+    return this.appService.createUser(createUserDto);
   }
 
   @Get()
@@ -18,7 +18,6 @@ export class AppController {
   }
 
   @Put(':id')
-
   async updateUser(
     @Param('id') id:string,@Body() updateData:UserUpdateDto)
     :Promise<User>{
